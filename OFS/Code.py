@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[13]:
-
-
 import sqlite3
 
 con = sqlite3.connect('myDB.db')
@@ -23,12 +20,6 @@ for row in cur.execute('SELECT investor_e_mail FROM Investor'):
 
 con.close()
 
-
-# ### Mix
-
-# In[14]:
-
-
 #import libs
 import PySimpleGUI as sg
 import random
@@ -37,11 +28,6 @@ from datetime import datetime
 #connect to the db
 con = sqlite3.connect('myDB.db')
 cur = con.cursor()
-
-# global variables
-# login_user_id = -1
-# login_user_name = -1
-# login_user_type = -1 ???????????
 
 #window fucntion: creates a window for each function
 def window_login():
@@ -247,14 +233,6 @@ def button_login(values):
             window.close()
             window = window_company_owner()
 
-# window = window_login()
-
-
-# ### Add Tier 
-
-# In[15]:
-
-
 def window_add_tier(chosen_product):
     
     cur.execute('SELECT PID FROM Product WHERE Product_Name = ?', (chosen_product,))
@@ -307,11 +285,6 @@ def button_add_tier(values, pid):
     window.Element('minimum_amount').Update(value='')
     window.Element('title').Update(value='')
     window.Element('description').Update(value='')
-
-
-# ### Login
-
-# In[16]:
 
 
 def button_login(values): # login
@@ -367,11 +340,7 @@ def button_login(values): # login
 
 window = window_login()
 
-
-# ### Create New Product
-
-# In[17]:
-
+#Create New Product
 
 def window_create_product(chosen_company):
     
@@ -396,10 +365,6 @@ def window_create_product(chosen_company):
 
 def button_create_product(values, c_name):
     
-    # cur.execute('SELECT Company_Name FROM Company WHERE Company_Name = ?',(chosen_company,))
-    # row = cur.fetchone()
-    # c_name = row[0]
- 
     product_name = values["Product_Name"]; company_name = c_name; typex = values["Type"]; 
     don_goal = values["Donation_Goal"]; end_date = values["End_Date"]; descripto = values["Description"]
     
@@ -448,14 +413,7 @@ def button_create_product(values, c_name):
     
     return sg.Window('Products List of This Company', layout2)
     
-      
-
-
-# ### Events
-
-# In[18]:
-
-
+# Events
 while True:
     event, values = window.read()
     if event == 'Login':
@@ -574,9 +532,6 @@ window.close()
 
 con.commit()
 con.close()
-
-
-# In[ ]:
 
 
 
